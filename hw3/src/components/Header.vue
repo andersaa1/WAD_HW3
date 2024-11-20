@@ -22,18 +22,13 @@ export default {
 .appHeader {
   background-color: white;
   color: #333;
-  border-bottom: 1.5px solid #ccc;
+  border-bottom: 1.5px solid #ccc; /* Gray border at the bottom of the header */
 }
 
 .container {
   display: flex;
-  flex-direction: column; /* Adjusted to stack title and nav */
+  flex-direction: column; /* Stack elements */
   align-items: center;
-}
-
-.appHeader nav ul {
-  list-style-type: none;
-  padding: 0;
 }
 
 .links {
@@ -44,16 +39,12 @@ export default {
   gap: 0.5rem; /* Space between links */
 }
 
-
-.inks li {
-  display: inline;
-}
-
 .links a {
   color: #333;
   text-decoration: none;
 }
 
+/* link behavior when active*/
 .links a.router-link-exact-active {
   font-weight: bold;
   text-decoration: underline;
