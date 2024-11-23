@@ -1,0 +1,82 @@
+[
+    {
+        "postID": 1,
+        "author": "Alice",
+        "title": "Exploring the Old Town of Tartu",
+        "content": "The Old Town of Tartu is a charming area with cobblestone streets, historic buildings, and cozy cafes. It's a great place to take a leisurely stroll and soak in the atmosphere.",
+        "timestamp": "2023-01-01T10:00:00Z",
+        "image": "https://i.imgur.com/u1303pB.jpeg"
+    },
+    {
+        "postID": 2,
+        "author": "Bob",
+        "title": "Visit to the University of Tartu",
+        "content": "The University of Tartu is one of the oldest and most prestigious universities in the region. The main building is an architectural masterpiece, and the campus is full of history.",
+        "timestamp": "2023-01-02T11:00:00Z",
+        "image": "https://i.imgur.com/TxJHEpe.jpeg"
+    },
+    {
+        "postID": 3,
+        "author": "Charlie",
+        "title": "A Day at the Estonian National Museum",
+        "content": "The Estonian National Museum in Tartu offers a fascinating look into the history and culture of Estonia. The exhibits are well-curated, and the modern architecture of the building is impressive.",
+        "timestamp": "2023-01-03T12:00:00Z",
+        "image": "https://i.imgur.com/rlWlpYV.jpeg"
+    },
+    {
+        "postID": 4,
+        "author": "David",
+        "title": "Relaxing by the Emaj\u00f5gi River",
+        "content": "The Emaj\u00f5gi River flows through Tartu, providing a picturesque setting for a relaxing walk or boat ride. The riverbanks are lined with parks and green spaces, perfect for a picnic.",
+        "timestamp": "2023-01-04T13:00:00Z",
+        "image": "https://i.imgur.com/T46wYgL.jpeg"
+    },
+    {
+        "postID": 5,
+        "author": "Eve",
+        "title": "Discovering Tartu's Street Art",
+        "content": "Tartu is known for its vibrant street art scene. Take a walk around the city to discover colorful murals and graffiti that add a unique touch to the urban landscape.",
+        "timestamp": "2023-01-05T14:00:00Z",
+        "image": "https://i.imgur.com/OwEGLFA.jpeg"
+    },
+    {
+        "postID": 6,
+        "author": "Frank",
+        "title": "Enjoying Local Cuisine in Tartu",
+        "content": "Tartu offers a variety of dining options, from traditional Estonian cuisine to international flavors. Be sure to try some local dishes like black bread, herring, and kama.",
+        "timestamp": "2023-01-06T15:00:00Z",
+        "image": "https://i.imgur.com/OkakkC6.jpeg"
+    },
+    {
+        "postID": 7,
+        "author": "Grace",
+        "title": "Exploring Toome Hill",
+        "content": "Toome Hill is a beautiful park in Tartu that offers stunning views of the city. It's a great place for a hike or a picnic, and you can also visit the ruins of Tartu Cathedral.",
+        "timestamp": "2023-01-07T16:00:00Z",
+        "image": "https://i.imgur.com/5ApoQtR.jpeg"
+    },
+    {
+        "postID": 8,
+        "author": "Heidi",
+        "title": "A Night Out in Tartu",
+        "content": "Tartu has a lively nightlife scene with plenty of bars, clubs, and live music venues. Whether you're looking for a quiet drink or a night of dancing, there's something for everyone.",
+        "timestamp": "2023-01-08T17:00:00Z",
+        "image": "https://i.imgur.com/D2nJZf8.png"
+    },
+    {
+        "postID": 9,
+        "author": "Ivan",
+        "title": "Visiting AHHAA Science Centre",
+        "content": "The AHHAA Science Centre in Tartu is a fun and educational experience for all ages. With interactive exhibits and hands-on activities, it's a great place to learn about science and technology.",
+        "timestamp": "2023-01-09T18:00:00Z",
+        "image": "https://i.imgur.com/ryj5SdC.jpeg"
+    },
+    {
+        "postID": 10,
+        "author": "Judy",
+        "title": "Exploring Tartu's Museums",
+        "content": "Tartu is home to several interesting museums, including the Tartu Art Museum and the KGB Cells Museum. Each museum offers a unique perspective on the city's history and culture.",
+        "timestamp": "2023-01-10T19:00:00Z",
+        "image": "https://i.imgur.com/hzpku1j.jpeg"
+    }
+]

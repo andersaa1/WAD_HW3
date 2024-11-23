@@ -1,10 +1,14 @@
 <template>
   <div>
     <div v-for="(post, index) in posts" :key="index">
-      <p>{{ post.title }}</p>
-      <LikeButton
-        :initialLikes="post.likes"
-        @update-likes="updateLikes(index, $event)"
+      <Post
+          :author="post.author"
+          :title="post.title"
+          :content="post.content"
+          :timestamp="post.timestamp"
+          :image="post.image"
+          :likes="post.likes"
+          @update-likes="updateLikes(index, $event)"
       />
     </div>
     <LikeReset @reset-all-likes="resetAllLikes" />
@@ -12,19 +16,15 @@
 </template>
 
 <script>
-import LikeButton from "@/components/LikeButton.vue";
+import Post from "@/components/Post.vue";
 import LikeReset from "@/components/LikeReset.vue";
 
 export default {
-  name: "ParentComponent",
-  components: { LikeButton, LikeReset },
+  name: "HomeView",
+  components: {Post, LikeReset},
   data() {
     return {
-      posts: [
-        { title: "Post 1", likes: 0 },
-        { title: "Post 2", likes: 0 },
-        { title: "Post 3", likes: 0 },
-      ],
+      posts: [],
     };
   },
   methods: {
@@ -36,6 +36,17 @@ export default {
         post.likes = 0;
       });
     },
+    fetchPosts() {
+      fetch('data.json')
+          .then(response => response.json())
+          .then(data => {
+            this.posts = data;
+          })
+          .catch(error => console.error('Error fetching posts:', error));
+    },
+  },
+  mounted() {
+    this.fetchPosts();
   },
 };
 </script>
