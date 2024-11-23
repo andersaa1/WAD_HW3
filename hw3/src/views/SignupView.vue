@@ -97,7 +97,7 @@ body {
 }
 
 .signup-box {
-  background-color: #333;
+  background-color: rgb(77, 87, 109);
   color: white;
   padding: 2rem;
   border-radius: 10px;
