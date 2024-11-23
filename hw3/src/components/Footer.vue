@@ -1,23 +1,24 @@
 <template>
-    <footer class="appFooter">
-      <div class="container">
-        <p>&copy; 2024 PostIt. All rights reserved.</p>
-        <a class="github-link" href="https://github.com/andersaa1/WAD_HW3">Github</a>
-      </div>
-    </footer>
-  </template>
-  
-  <script>
-  export default {
-    name: 'FooterComponent',
-  };
-  </script>
-  
-  <style scoped>
-  .appFooter {
-    background-color: white;
-    border-top: 1.5px solid #ccc; /* Gray border at the top of the footer */
-    display: flex;
+  <footer class="appFooter">
+    <div class="container">
+      <p>&copy; 2024 PostIt. All rights reserved.</p>
+      <a class="github-link" href="https://github.com/andersaa1/WAD_HW3">Github</a>
+    </div>
+  </footer>
+</template>
+
+<script>
+export default {
+  name: 'FooterComponent',
+};
+</script>
+
+<style scoped>
+.appFooter {
+  color: #F78361;
+  background-color: #4E586E; /* Light gray background */
+  display: flex;
+  padding-bottom: 1rem;
 }
 
 .container {
@@ -27,10 +28,10 @@
 }
 
 .github-link {
-  color: #0366d6;
+  color: #F54B64;
   text-decoration: none;
   font-weight: bold;
   margin: -0.5rem 0 0; /* Brings Github link closer to trademark */
 }
-  </style>
+</style>
   

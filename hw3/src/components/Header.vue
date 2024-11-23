@@ -4,8 +4,13 @@
       <h1>PostIt</h1>
       <nav>
         <ul class="links">
-          <li><router-link to="/">Home</router-link></li> |
-          <li><router-link to="/signup">Signup</router-link></li>
+          <li>
+            <router-link to="/">Home</router-link>
+          </li>
+          |
+          <li>
+            <router-link to="/signup">Signup</router-link>
+          </li>
         </ul>
       </nav>
     </div>
@@ -19,10 +24,13 @@ export default {
 </script>
 
 <style scoped>
+h1 {
+  color: #F78361;
+}
 .appHeader {
-  background-color: white;
+  background-color: #4E586E;
   color: #333;
-  border-bottom: 1.5px solid #ccc; /* Gray border at the bottom of the header */
+  box-shadow: 0 0 50px rgba(68, 68, 68, 1);
 }
 
 .container {
@@ -40,7 +48,7 @@ export default {
 }
 
 .links a {
-  color: #333;
+  color: #F54B64;
   text-decoration: none;
 }
 

@@ -11,7 +11,7 @@
           @update-likes="updateLikes(index, $event)"
       />
     </div>
-    <LikeReset @reset-all-likes="resetAllLikes" />
+    <LikeReset @reset-all-likes="resetAllLikes"/>
   </div>
 </template>
 
@@ -50,3 +50,10 @@ export default {
   },
 };
 </script>
+
+<style>
+body {
+  background-color: #1c1c1c;
+  margin: 0;
+}
+</style>

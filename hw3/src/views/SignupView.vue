@@ -84,12 +84,16 @@ export default {
 </script>
 
 <style scoped>
+body {
+  background-color: #1c1c1c;
+  margin: 0;
+}
+
 .container {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  background-color: white;
+  height: 80vh;
 }
 
 .signup-box {
@@ -109,8 +113,8 @@ export default {
 
 label {
   font-weight: bold;
-  margin-right: 1rem; 
-  width: 100px; 
+  margin-right: 1rem;
+  width: 100px;
   text-align: right;
 }
 
