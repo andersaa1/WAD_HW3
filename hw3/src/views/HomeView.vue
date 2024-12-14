@@ -1,3 +1,7 @@
+
+// muuta siin postitused nagu on figure 2-s
+// delete all button ka teha
+
 <template>
   <div>
     <div v-for="(post, index) in posts" :key="index">
@@ -11,30 +15,25 @@
           @update-likes="updateLikes(index, $event)"
       />
     </div>
-    <LikeReset @reset-all-likes="resetAllLikes"/>
+    <PostButton @newPost="newPost"/>
   </div>
 </template>
 
 <script>
+import PostButton from "@/components/PostButton.vue";
 import Post from "@/components/Post.vue";
-import LikeReset from "@/components/LikeReset.vue";
 
 export default {
   name: "HomeView",
-  components: {Post, LikeReset},
+  components: {Post, PostButton},
   data() {
     return {
       posts: [],
     };
   },
   methods: {
-    updateLikes(index, newLikes) {
-      this.posts[index].likes = newLikes;
-    },
-    resetAllLikes() {
-      this.posts.forEach((post) => {
-        post.likes = 0;
-      });
+    newPost() {
+      this.$router.push("/addpost");
     },
     fetchPosts() {
       fetch('data.json')

@@ -1,7 +1,7 @@
 <template>
   <div class="container">
-    <div class="signup-box">
-      <h1>Create a new account</h1>
+    <div class="login-box">
+        <h1>Log in</h1>
       <!-- @submit activates submitForm method when the button is clicked -->
       <form @submit.prevent="submitForm">
         <div class="inputs">
@@ -15,7 +15,11 @@
         <div v-if="passwordError" class="error-message">
           <p>{{ passwordError }}</p>
         </div>
-        <button type="submit">Sign up</button>
+        <button type="submit">Log in</button>
+        <p class="signup-text">
+            Don't have an account? 
+            <router-link to="/signup" class="signup-link">Sign up</router-link>
+        </p>
       </form>
     </div>
   </div>
@@ -97,7 +101,7 @@ body {
   height: 80vh;
 }
 
-.signup-box {
+.login-box {
   background-color: rgb(77, 87, 109);
   color: white;
   padding: 2rem;
@@ -140,5 +144,21 @@ button {
   margin-top: 1rem;
   color: red;
   font-size: 0.9rem;
+}
+
+.signup-text {
+  margin-top: 12px;
+  font-size: 14px;
+  color: #6c757d;
+  line-height: 0;
+}
+
+.signup-link {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.signup-link:hover {
+  text-decoration: underline;
 }
 </style>
