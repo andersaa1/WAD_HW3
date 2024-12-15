@@ -57,3 +57,31 @@ app.get('/auth/authenticate', async(req, res) => {
         res.status(400).send(err.message);
     }
 });
+
+// signup a user
+app.post('signup', async(req, res) => {
+    try {
+        console.log("a signup request has arrived");
+        //console.log(req.body);
+        const { email, password } = req.body;
+
+        const salt = await bcrypt.genSalt(); //  generates the salt, i.e., a random string
+        const bcryptPassword = await bcrypt.hash(password, salt) // hash the password and the salt 
+        const authUser = await pool.query( // insert the user and the hashed password into the database
+            "INSERT INTO users(email, password) values ($1, $2) RETURNING*", [email, bcryptPassword]
+        );
+        console.log(authUser.rows[0].id);
+        const token = await generateJWT(authUser.rows[0].id); // generates a JWT by taking the user id as an input (payload)
+        //console.log(token);
+        //res.cookie("isAuthorized", true, { maxAge: 1000 * 60, httpOnly: true });
+        //res.cookie('jwt', token, { maxAge: 6000000, httpOnly: true });
+        res
+            .status(201)
+            .cookie('jwt', token, { maxAge: 6000000, httpOnly: true })
+            .json({ user_id: authUser.rows[0].id })
+            .send;
+    } catch (err) {
+        console.error(err.message);
+        res.status(400).send(err.message);
+    }
+});
