@@ -3,20 +3,8 @@
 // delete all button ka teha
 
 <template>
-  <div>
-    <div v-for="(post, index) in posts" :key="index">
-      <Post
-          :author="post.author"
-          :title="post.title"
-          :content="post.content"
-          :timestamp="post.timestamp"
-          :image="post.image"
-          :likes="post.likes"
-          @update-likes="updateLikes(index, $event)"
-      />
-    </div>
-    <PostButton @newPost="newPost"/>
-  </div>
+  <button @click="logout" class="logout-button">Logout</button>
+  <PostButton @newPost="newPost"/>
 </template>
 
 <script>
@@ -32,9 +20,26 @@ export default {
     };
   },
   methods: {
+    logout() {
+      fetch("http://localhost:3000/auth/logout", {
+        method: "GET",
+        credentials: "include", // Required for handling cookies
+      })
+        .then((response) => {
+          if (response.ok) {
+            console.log("User logged out");
+            this.$router.push("/login"); // Redirect to login page
+          } else {
+            console.error("Logout failed");
+          }
+        })
+        .catch((error) => console.error("Error during logout:", error));
+    },
+
     newPost() {
       this.$router.push("/addpost");
     },
+
     fetchPosts() {
       fetch('data.json')
           .then(response => response.json())
@@ -54,5 +59,16 @@ export default {
 body {
   background-color: #1c1c1c;
   margin: 0;
+}
+
+.logout-button {
+  background-color: #3f12d4a6;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 0.8rem;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-bottom: 1rem;
 }
 </style>
