@@ -59,7 +59,7 @@ app.get('/auth/authenticate', async(req, res) => {
 });
 
 // signup a user
-app.post('signup', async(req, res) => {
+app.post('/auth/signup', async(req, res) => {
     try {
         console.log("a signup request has arrived");
         //console.log(req.body);
