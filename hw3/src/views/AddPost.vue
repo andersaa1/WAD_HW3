@@ -2,20 +2,59 @@
   <div class="container">
     <div class="signup-box">
       <h1>Add post</h1>
-      <div class="inputs">
-        <label for="Post">Body:</label>
-        <input placeholder="Enter your post message" required/>
+      <div>
+        <div class="inputs">
+          <label for="Post">Title:</label>
+          <input placeholder="Title" required/>
+          <div/>
+        </div>
+        <div class="inputs">
+          <label for="Post">Content:</label>
+          <input placeholder="Content" required/>
+          <div/>
+        </div>
+        <div class="inputs">
+          <label for="Post">Image url:</label>
+          <input  placeholder="Image url"/>
+          <div/>
+        </div>
+        <button @click="goToHome" type="submit">Post</button>
       </div>
-      <button @click="goToHome" type="submit">Post</button>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-    methods: {
+  methods: {
     goToHome() {
-      this.$router.push("/");
+      const title = this.$el.querySelector('input[placeholder="Title"]').value;
+      const content = this.$el.querySelector('input[placeholder="Content"]').value;
+      const imageUrl = this.$el.querySelector('input[placeholder="Image url"]').value;
+
+      const postBody = {
+        title: title,
+        content: content,
+        image: imageUrl
+      };
+
+      fetch("http://localhost:3000/posts", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(postBody),
+        credentials: "include", // Required for handling cookies
+      })
+          .then((response) => {
+            if (response.ok) {
+              console.log("Post added successfully");
+              this.$router.push("/");
+            } else {
+              console.error("Failed to add post");
+            }
+          })
+          .catch((error) => console.error("Error during post:", error));
     },
   },
 }

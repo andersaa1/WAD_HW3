@@ -9,7 +9,7 @@ const port = process.env.PORT || 3000;
 
 const app = express();
 
-app.use(cors({ origin: 'http://localhost:8082', credentials: true }));
+app.use(cors({ origin: 'http://localhost:8080', credentials: true }));
 // We need to include "credentials: true" to allow cookies to be represented 
 // Also "credentials: 'include'" need to be added in Fetch API in the Vue.js App
 
@@ -89,6 +89,7 @@ app.post('/auth/signup', async(req, res) => {
 app.post('/auth/login', async(req, res) => {
     try {
         console.log("a login request has arrived");
+        console.log(req.body);
         const { email, password } = req.body;
         const user = await pool.query("SELECT * FROM users WHERE email = $1", [email]);
         if (user.rows.length === 0) return res.status(401).json({ error: "User is not registered" });
@@ -113,4 +114,105 @@ app.post('/auth/login', async(req, res) => {
 app.get('/auth/logout', (req, res) => {
     console.log('delete jwt request arrived');
     res.status(202).clearCookie('jwt').json({ "Msg": "cookie cleared" }).send
+});
+
+/// Middleware to authenticate token
+const authenticateToken = (req, res, next) => {
+    const token = req.cookies.jwt;
+    if (!token) return res.status(401).json({ error: "Access denied" });
+
+    jwt.verify(token, secret, (err, user) => {
+        if (err) return res.status(403).json({ error: "Invalid token" });
+        req.user = user;
+        next();
+    });
+};
+
+// Create a new post
+app.post('/posts', authenticateToken, async (req, res) => {
+    try {
+        const { title, content, image } = req.body;
+        const author = req.user.id;
+        const timestamp = new Date();
+        const newPost = await pool.query(
+            "INSERT INTO posts (author, title, content, timestamp, image) VALUES ($1, $2, $3, $4, $5) RETURNING *",
+            [author, title, content, timestamp, image]
+        );
+        res.status(201).json(newPost.rows[0]);
+    } catch (err) {
+        console.error(err.message);
+        res.status(400).send(err.message);
+    }
+});
+
+// Read all posts
+app.get('/posts', authenticateToken, async (req, res) => {
+    try {
+        const allPosts = await pool.query("SELECT * FROM posts");
+        res.json(allPosts.rows);
+    } catch (err) {
+        console.error(err.message);
+        res.status(400).send(err.message);
+    }
+});
+
+// Read a single post by ID
+app.get('/posts/:id', authenticateToken, async (req, res) => {
+    try {
+        const { id } = req.params;
+        const post = await pool.query("SELECT * FROM posts WHERE postID = $1", [id]);
+        if (post.rows.length === 0) return res.status(404).json({ error: "Post not found" });
+        res.json(post.rows[0]);
+    } catch (err) {
+        console.error(err.message);
+        res.status(400).send(err.message);
+    }
+});
+
+// Update a post by ID
+app.put('/posts/:id', authenticateToken, async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { author, title, content, timestamp, image } = req.body;
+        const updatedPost = await pool.query(
+            "UPDATE posts SET author = $1, title = $2, content = $3, timestamp = $4, image = $5 WHERE postID = $6 RETURNING *",
+            [author, title, content, timestamp, image, id]
+        );
+        if (updatedPost.rows.length === 0) return res.status(404).json({ error: "Post not found" });
+        res.json(updatedPost.rows[0]);
+    } catch (err) {
+        console.error(err.message);
+        res.status(400).send(err.message);
+    }
+});
+
+// Delete a post by ID
+app.delete('/posts/:id', authenticateToken, async (req, res) => {
+    try {
+        const { id } = req.params;
+        const user = req.user;
+
+        // Check if the authenticated user is the author of the post
+        const post = await pool.query("SELECT * FROM posts WHERE postID = $1", [id]);
+        if (post.rows.length === 0) return res.status(404).json({ error: "Post not found" });
+        if (post.rows[0].author !== user.id) return res.status(403).json({ error: "You are not authorized to delete this post" });
+
+        const deletedPost = await pool.query("DELETE FROM posts WHERE postID = $1 RETURNING *", [id]);
+        res.json({ message: "Post deleted successfully" });
+    } catch (err) {
+        console.error(err.message);
+        res.status(400).send(err.message);
+    }
+});
+
+// Delete all posts by a specific user
+app.delete('/posts', authenticateToken, async (req, res) => {
+    try {
+        const deletedPosts = await pool.query("DELETE FROM posts WHERE author = $1 RETURNING *", [req.user.id]);
+        if (deletedPosts.rows.length === 0) return res.status(404).json({ error: "No posts found for this author" });
+        res.json({ message: "All posts by the author deleted successfully" });
+    } catch (err) {
+        console.error(err.message);
+        res.status(400).send(err.message);
+    }
 });

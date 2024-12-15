@@ -1,19 +1,31 @@
-
-// muuta siin postitused nagu on figure 2-s
-// delete all button ka teha
+// TODO: Implement the delete all button component
 
 <template>
-  <button @click="logout" class="logout-button">Logout</button>
-  <PostButton @newPost="newPost"/>
+  <div class="container">
+    <button @click="logout" class="logout-button">Logout</button>
+    <PostButton @newPost="newPost"/>
+    <DeleteAllButton/>
+  </div>
+  <div v-for="(post, index) in posts" :key="index">
+    <Post
+        :author="post.author"
+        :title="post.title"
+        :content="post.content"
+        :timestamp="post.timestamp"
+        :image="post.image"
+        :likes="post.likes"
+    />
+  </div>
 </template>
 
 <script>
 import PostButton from "@/components/PostButton.vue";
 import Post from "@/components/Post.vue";
+import DeleteAllButton from "@/components/DeleteAllButton.vue";
 
 export default {
   name: "HomeView",
-  components: {Post, PostButton},
+  components: {DeleteAllButton, Post, PostButton},
   data() {
     return {
       posts: [],
@@ -41,10 +53,14 @@ export default {
     },
 
     fetchPosts() {
-      fetch('data.json')
+      fetch("http://localhost:3000/posts", {
+        method: "GET",
+        credentials: "include", // Required for handling cookies
+      })
           .then(response => response.json())
           .then(data => {
             this.posts = data;
+            console.log(this.posts)
           })
           .catch(error => console.error('Error fetching posts:', error));
     },
@@ -56,6 +72,12 @@ export default {
 </script>
 
 <style>
+.container{
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
 body {
   background-color: #1c1c1c;
   margin: 0;
@@ -69,6 +91,5 @@ body {
   padding: 0.8rem;
   font-size: 1rem;
   cursor: pointer;
-  margin-bottom: 1rem;
 }
 </style>

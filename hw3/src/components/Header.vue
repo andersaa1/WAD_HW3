@@ -5,7 +5,7 @@
         <h1>PostIt</h1>
         <div class="auth">
           <button @click="goToLogin" class="login-button">
-            <img src="@/assets/login.png" alt="Log in Icon" class="icon" />
+            <img src="@/assets/login.png" alt="Log in Icon" class="icon"/>
             Log in
           </button>
         </div>
@@ -88,7 +88,7 @@ h1 {
 .auth {
   display: flex;
   flex-direction: column;
-  align-items: flex-end; 
+  align-items: flex-end;
 }
 
 .login-button {
