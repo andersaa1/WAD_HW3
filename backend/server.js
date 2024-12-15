@@ -9,7 +9,7 @@ const port = process.env.PORT || 3000;
 
 const app = express();
 
-app.use(cors({ origin: 'http://localhost:8080', credentials: true }));
+app.use(cors({ origin: 'http://localhost:8082', credentials: true }));
 // We need to include "credentials: true" to allow cookies to be represented 
 // Also "credentials: 'include'" need to be added in Fetch API in the Vue.js App
 
@@ -107,4 +107,10 @@ app.post('/auth/login', async(req, res) => {
     } catch (error) {
         res.status(401).json({ error: error.message });
     }
+});
+
+//logout a user = deletes the jwt
+app.get('/auth/logout', (req, res) => {
+    console.log('delete jwt request arrived');
+    res.status(202).clearCookie('jwt').json({ "Msg": "cookie cleared" }).send
 });

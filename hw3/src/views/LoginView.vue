@@ -5,14 +5,11 @@
       <form @submit.prevent="LogIn">
         <div class="inputs">
           <label for="email">Email:</label>
-          <input placeholder="Enter your email" required/>
+          <input v-model="email" type="email" placeholder="Enter your email" required/>
         </div>
         <div class="inputs">
           <label for="password">Password:</label>
           <input type="password" id="password" v-model="password" placeholder="Enter your password" required/>
-        </div>
-        <div v-if="passwordError" class="error-message">
-          <p>{{ passwordError }}</p>
         </div>
         <button type="submit">Log in</button>
         <p class="signup-text">
